@@ -11,6 +11,14 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
 
 <style>
+/* ===============================
+   ROOT + BODY
+=============================== */
+:root {
+    --primary-color: #1e90ff;
+    --hover-color: #0b3d91;
+}
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -18,8 +26,8 @@ body {
 }
 
 /* ===============================
-   FIXED RESPONSIVE NAVBAR
-===============================*/
+   HEADER + NAVBAR
+=============================== */
 header {
     width: 100%;
     background: white;
@@ -39,9 +47,23 @@ header {
 }
 
 .logo {
-    color: #1e90ff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo img {
+    height: 45px;
+    width: auto;
+    object-fit: contain;
+    transition: height 0.3s ease;
+}
+
+.logo span {
     font-size: 22px;
     font-weight: 700;
+    color: var(--primary-color);
+    transition: font-size 0.3s ease;
 }
 
 /* NAV LINKS */
@@ -59,7 +81,7 @@ header {
 }
 
 .nav-links li a:hover {
-    color: #1e90ff;
+    color: var(--primary-color);
 }
 
 /* HAMBURGER ICON */
@@ -67,13 +89,95 @@ header {
     display: none;
     font-size: 28px;
     cursor: pointer;
+    color: var(--primary-color);
 }
 
-/* MOBILE NAVIGATION */
+/* ===============================
+   WEATHER POPUP
+=============================== */
+#weatherPopup {
+    position: fixed;
+    right: 20px;
+    top: 80px;
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    width: 250px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    border-left: 5px solid var(--primary-color);
+    display: none;
+    z-index: 9999;
+}
+
+#weatherPopup h3 {
+    margin-top: 0;
+    color: var(--primary-color);
+    font-size: 20px;
+}
+
+#weatherPopup button {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* ===============================
+   MAP
+=============================== */
+#map {
+    height: 60vh;
+    width: 90%;
+    max-width: 1000px;
+    margin: 30px auto;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* SEARCH */
+#inputDiv {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#inputDiv input {
+    padding: 8px;
+    width: 220px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-right: 8px;
+}
+
+#inputDiv button {
+    padding: 8px 12px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#inputDiv button:hover {
+    background: var(--hover-color);
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 15px;
+    background: var(--primary-color);
+    color: white;
+}
+
+/* ===============================
+   MOBILE RESPONSIVENESS
+=============================== */
 @media (max-width: 768px) {
     .menu-icon {
         display: block;
-        color: #1e90ff;
     }
 
     .nav-links {
@@ -94,7 +198,7 @@ header {
     }
 
     .nav-links.show {
-        display: block;
+        display: flex;
         animation: fadeDown 0.3s ease-in-out;
     }
 
@@ -102,84 +206,18 @@ header {
         from { opacity: 0; transform: translateY(-10px); }
         to { opacity: 1; transform: translateY(0); }
     }
-}
 
-/* ===============================
-   WEATHER POPUP
-===============================*/
-#weatherPopup {
-    position: fixed;
-    right: 20px;
-    top: 80px;
-    background: white;
-    padding: 15px;
-    border-radius: 12px;
-    width: 250px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    border-left: 5px solid #1e90ff;
-    display: none;
-    z-index: 9999;
-}
-#weatherPopup h3 {
-    margin-top: 0;
-    color: #1e90ff;
-    font-size: 20px;
-}
-#weatherPopup button {
-    background: #1e90ff;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    margin-top: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-}
+    /* Responsive logo */
+    .logo img { height: 35px; }
+    .logo span { font-size: 18px; }
 
-/* MAP */
-#map {
-    height: 60vh;
-    width: 90%;
-    max-width: 1000px;
-    margin: 0 auto 30px auto;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-}
-
-/* Search */
-#inputDiv {
-    text-align: center;
-    margin-bottom: 20px;
-}
-#inputDiv input {
-    padding: 8px;
-    width: 220px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    margin-right: 8px;
-}
-#inputDiv button {
-    padding: 8px 12px;
-    background: #1e90ff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-#inputDiv button:hover {
-    background: #0b3d91;
-}
-
-footer {
-    text-align: center;
-    padding: 15px;
-    background: #1e90ff;
-    color: white;
-}
-
-/* Responsive tweaks */
-@media(max-width:768px){
     #map { height: 55vh; width: 95%; }
     #weatherPopup { width: 85%; right: 7%; }
+}
+
+@media (max-width: 480px) {
+    .logo img { height: 30px; }
+    .logo span { font-size: 16px; }
 }
 </style>
 </head>
@@ -189,7 +227,7 @@ footer {
 <header>
     <nav class="navbar">
         <div class="logo">
-            <img src="logo.png" alt="STAR Logo" class="logo-img">
+            <img src="logo.png" alt="STAR Logo">
             <span>STAR</span>
         </div>
 
@@ -206,7 +244,6 @@ footer {
     </nav>
 </header>
 
-
 <!-- WEATHER POPUP -->
 <div id="weatherPopup">
     <h3>🌤️ Weather Update</h3>
@@ -214,7 +251,7 @@ footer {
     <button onclick="closeWeather()">Close</button>
 </div>
 
-<h2 style="text-align:center;color:#1e90ff;margin-top:20px;">Nearby Hospitals</h2>
+<h2 style="text-align:center;color:var(--primary-color);margin-top:20px;">Nearby Hospitals</h2>
 <p class="instructions" style="text-align:center;">
     Your location is detected automatically. Nearby hospitals appear on the map.<br>
     You can also search a place manually.
@@ -237,32 +274,28 @@ footer {
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 <script>
-/* ================================
-   WORKING MOBILE MENU
-================================*/
+// ===== MOBILE MENU =====
 function toggleMenu() {
     document.getElementById("navLinks").classList.toggle("show");
 }
 
-/* ===================================
-   MAP + WEATHER + HOSPITAL LOGIC
-===================================*/
+// ===== MAP + WEATHER + HOTSPOTS =====
 let map = L.map('map');
 let userLat, userLon;
 let currentRoute = null;
 
-/* ---- HOTSPOTS ARRAY (unchanged) ---- */
+// Example hotspots (replace with full data)
 const customHotspots = [
-    /* >>>>> your full hotspots list remains unchanged <<<<< */
-    /* (omitted here for brevity — keep your entire array) */
+    { name: "City Hospital", lat: 31.705, lon: 76.985, address: "Main Street, City", contact: "1234567890" },
+    { name: "Health Care Center", lat: 31.710, lon: 76.990, address: "2nd Street, City", contact: "0987654321" }
 ];
 
-/* OpenStreetMap layer */
+// OpenStreetMap layer
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap'
 }).addTo(map);
 
-/* WEATHER */
+// WEATHER
 function getWeather(lat, lon) {
     const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`;
 
@@ -280,7 +313,7 @@ function closeWeather() {
     document.getElementById("weatherPopup").style.display = "none";
 }
 
-/* USER LOCATION */
+// USER LOCATION
 function locateUser() {
     if(navigator.geolocation){
         navigator.geolocation.getCurrentPosition(
@@ -305,7 +338,7 @@ function showUserLocation(){
     plotCustomHotspots();
 }
 
-/* SEARCH */
+// SEARCH PLACE
 function searchPlace(){
     const place = document.getElementById('placeName').value;
     if(!place) return alert("Enter place name!");
@@ -323,7 +356,7 @@ function searchPlace(){
     });
 }
 
-/* PLOT HOTSPOTS */
+// PLOT HOTSPOTS
 function plotCustomHotspots(){
     customHotspots.forEach(h=>{
         L.marker([h.lat, h.lon], {
@@ -341,7 +374,7 @@ function plotCustomHotspots(){
     });
 }
 
-/* ROUTING */
+// DRAW ROUTE
 function drawRoute(lat, lon){
     if(currentRoute) map.removeControl(currentRoute);
 
@@ -354,6 +387,7 @@ function drawRoute(lat, lon){
     }).addTo(map);
 }
 
+// INIT
 locateUser();
 </script>
 
