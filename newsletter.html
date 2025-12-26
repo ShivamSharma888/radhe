@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STAR | Smart Scrub Typhus Monitoring</title>
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link href="assets/css/main.css" rel="stylesheet">
+  <link href="assets/css/content.css" rel="stylesheet">
+  <style>
+
+
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <nav class="navbar">
+      <div class="logo">
+        <img src="assets/images/logo.png" alt="Star-logo">
+        <span>STAR</span>
+      </div>
+      <div class="menu-icon" onclick="toggleMenu()">☰</div>
+      <ul class="nav-links" id="navLinks">
+        <li> <a href="index.html">Home</a></li>
+        <li><a href="about-us.html">About Us</a></li>
+        <li><a href="hotspots.html">Hotspots</a></li>
+        <li><a href="features.html">Features</a></li>
+        <li><a href="assessment.html">Assessment</a></li>
+        <li><a href="prediction.html">Prediction</a></li>
+        <li><a href="hospitals.html">Hospitals</a></li>
+        <li><a href="contact-us.html">Contact Us</a></li>
+
+      </ul>
+    </nav>
+  </header>
+
+
+
+
+
+
+  <main>
+    <div id="news-container">
+      <div class="loader">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <span>© 2025 STAR • Smart Scrub Typhus Monitoring Platform</span>
+
+      <div class="footer-socials">
+        <a href="#" aria-label="Website"><i class="fas fa-globe"></i></a>
+        <a href="#" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/script.js"></script>
+
+  <script>
+    const API_KEY = "pub_e9419db1dbb3403ea0ebf8df650e457f";
+
+    /* Expanded global keywords */
+    const KEYWORDS = encodeURIComponent(
+      "scrub typhus OR tsutsugamushi OR mite-borne fever OR rickettsia"
+    );
+
+    /* Last 3 months date range */
+    const today = new Date();
+    const pastDate = new Date();
+    pastDate.setMonth(today.getMonth() - 3);
+
+    const fromDate = pastDate.toISOString().split("T")[0];
+
+    const NEWS_CONTAINER = document.getElementById("news-container");
+
+    async function fetchNews() {
+      try {
+        const url = `https://newsdata.io/api/1/latest?apikey=${API_KEY}&q=${KEYWORDS}&from_date=${fromDate}&language=en&country=us,in,uk,au,ca,sg,za,id,ph,bd`;
+
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if (data.results && data.results.length > 0) {
+          displayNews(data.results);
+        } else {
+          NEWS_CONTAINER.innerHTML = `
+        <p style="text-align:center; padding:20px; font-size:1.1rem;">
+          No scrub typhus related news found in the last 3 months.<br>
+          Please check again later.
+        </p>`;
+        }
+      } catch (error) {
+        NEWS_CONTAINER.innerHTML = `
+      <p style="text-align:center; padding:20px; font-size:1.1rem;">
+        Error fetching news. Please try again later.
+      </p>`;
+      }
+    }
+
+    function displayNews(articles) {
+      NEWS_CONTAINER.innerHTML = "";
+
+      articles.forEach(article => {
+        const card = document.createElement("div");
+        card.className = "news-item";
+
+        const imgHTML = article.image_url
+          ? `<img src="${article.image_url}" alt="News Image">`
+          : `<img src="https://via.placeholder.com/400x220/ADD8E6/000?text=No+Image" alt="">`;
+
+        card.innerHTML = `
+      ${imgHTML}
+      <div class="news-content">
+        <h2>${article.title}</h2>
+        <p>${article.description || "No description available."}</p>
+        <a href="${article.link}" target="_blank">Read Full Article</a>
+      </div>
+    `;
+        NEWS_CONTAINER.appendChild(card);
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", fetchNews);
+  </script>
+
+</body>
+
+</html>

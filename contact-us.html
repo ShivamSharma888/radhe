@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STAR | Smart Scrub Typhus Monitoring</title>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link href="assets/css/main.css" rel="stylesheet">
+    <link href="assets/css/styles.css" rel="stylesheet">
+    <style>
+
+
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="assets/images/logo.png" alt="Star-logo">
+                <span>STAR</span>
+            </div>
+            <div class="menu-icon" onclick="toggleMenu()">☰</div>
+            <ul class="nav-links" id="navLinks">
+                <li> <a href="index.html">Home</a></li>
+                <li><a href="about-us.html">About Us</a></li>
+                <li><a href="hotspots.html">Hotspots</a></li>
+                <li><a href="features.html">Features</a></li>
+                <li><a href="assessment.html">Assessment</a></li>
+                <li><a href="prediction.html">Prediction</a></li>
+                <li><a href="hospitals.html">Hospitals</a></li>
+                <li><a href="contact-us.html">Contact Us</a></li>
+
+            </ul>
+        </nav>
+    </header>
+    <!-- CONTACT SECTION -->
+    <section class="contact-section">
+        <div class="contact-info">
+            <h2>Contact Information</h2>
+            <p><i class="fas fa-map-marker-alt"></i> IIT Mandi Region, Himachal Pradesh</p>
+            <p><i class="fas fa-phone-alt"></i> +91 86288 44890</p>
+            <p><i class="fas fa-envelope"></i> support@star-health.in</p>
+            <p><i class="fas fa-globe"></i> www.star-scrubtyphus.in</p>
+        </div>
+
+        <div class="contact-form">
+            <h2>Send Us a Message</h2>
+
+            <form id="contactForm">
+                <input type="text" id="name" placeholder="Your Name" required>
+                <input type="email" id="email" placeholder="Your Email" required>
+                <input type="text" id="subject" placeholder="Subject" required>
+                <textarea id="message" rows="6" placeholder="Your Message" required></textarea>
+
+                <button type="submit">Send Message</button>
+                <p id="responseMessage"></p>
+            </form>
+        </div>
+    </section>
+
+
+
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <span>© 2025 STAR • Smart Scrub Typhus Monitoring Platform</span>
+
+            <div class="footer-socials">
+                <a href="#" aria-label="Website"><i class="fas fa-globe"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // FOR CONTACT FORM
+        const form = document.getElementById('contactForm');
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            document.getElementById('responseMessage').textContent =
+                "Thank you! Your message has been sent successfully.";
+            form.reset();
+        });
+
+       
+    </script>
+
+</body>
+
+</html>

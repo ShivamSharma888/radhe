@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STAR | Smart Scrub Typhus Monitoring</title>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link href="assets/css/main.css" rel="stylesheet">
+    <link href="assets/css/content.css" rel="stylesheet">
+    <style>
+
+
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="assets/images/logo.png"alt="Star-logo">
+                <span>STAR</span>
+            </div>
+            <div class="menu-icon" onclick="toggleMenu()">☰</div>
+            <ul class="nav-links" id="navLinks">
+                <li> <a href="index.html">Home</a></li>
+                <li><a href="about-us.html">About Us</a></li>
+                <li><a href="hotspots.html">Hotspots</a></li>
+                <li><a href="features.html">Features</a></li>
+                <li><a href="assessment.html">Assessment</a></li>
+                <li><a href="prediction.html">Prediction</a></li>
+                <li><a href="hospitals.html">Hospitals</a></li>
+                <li><a href="contact-us.html">Contact Us</a></li>
+
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Smarter <span>Disease Tracking</span><br>Starts Here</h1>
+                <p>
+                    STAR combines AI, climate intelligence and real-time data to predict
+                    Scrub Typhus outbreaks and guide people to timely care.
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary">Get Started</button>
+                    <button class="btn btn-outline">View Hotspots</button>
+                </div>
+            </div>
+
+            <div class="hero-image">
+                <img src="assets/images/image.jpeg">
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">Platform Capabilities</h2>
+        <div class="features">
+            <div class="feature-card">
+                <img src="assets/images/ai.jpg">
+                <h3>AI Self-Assessment</h3>
+                <p>Instant symptom analysis powered by intelligent risk scoring.</p>
+            </div>
+
+            <div class="feature-card">
+                <img src="assets/images/climate.jpg">
+                <h3>Climate Predictions</h3>
+                <p>Outbreak forecasting using rainfall, temperature & humidity.</p>
+            </div>
+
+            <div class="feature-card">
+                <img src="assets/images/hospital.jpg">
+                <h3>Smart Hospital Finder</h3>
+                <p>Locate trusted healthcare centers near your location.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">Live Scrub Typhus Hotspots</h2>
+        <div id="map"></div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <span>© 2025 STAR • Smart Scrub Typhus Monitoring Platform</span>
+
+            <div class="footer-socials">
+                <a href="#" aria-label="Website"><i class="fas fa-globe"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        function toggleMenu() {
+            document.getElementById("navLinks").classList.toggle("show");
+        }
+
+        const map = L.map('map').setView([20.59, 78.96], 5);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+
+        const hotspots = [
+            { lat: 31.10, lng: 77.17, city: "Himachal Pradesh", cases: 120 },
+            { lat: 28.70, lng: 77.10, city: "Delhi", cases: 55 },
+            { lat: 25.09, lng: 85.31, city: "Bihar", cases: 41 },
+        ];
+
+        hotspots.forEach(h => {
+            L.marker([h.lat, h.lng])
+                .addTo(map)
+                .bindPopup(`<b>${h.city}</b><br>Cases: ${h.cases}`);
+        });
+    </script>
+
+</body>
+
+</html>

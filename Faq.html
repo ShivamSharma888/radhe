@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STAR | Smart Scrub Typhus Monitoring</title>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link href="assets/css/main.css" rel="stylesheet">
+    <link href="assets/css/content.css" rel="stylesheet">
+    <style>
+
+
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="assets/images/logo.png" alt="Star-logo">
+                <span>STAR</span>
+            </div>
+            <div class="menu-icon" onclick="toggleMenu()">☰</div>
+            <ul class="nav-links" id="navLinks">
+                <li> <a href="index.html">Home</a></li>
+                <li><a href="about-us.html">About Us</a></li>
+                <li><a href="hotspots.html">Hotspots</a></li>
+                <li><a href="features.html">Features</a></li>
+                <li><a href="assessment.html">Assessment</a></li>
+                <li><a href="prediction.html">Prediction</a></li>
+                <li><a href="hospitals.html">Hospitals</a></li>
+                <li><a href="contact-us.html">Contact Us</a></li>
+
+            </ul>
+        </nav>
+    </header>
+
+
+
+
+
+
+
+
+    <!-- FAQ SECTION -->
+    <section class="faq-section">
+        <h1>Frequently Asked Questions</h1>
+
+        <div class="faq-item">
+            <div class="faq-question">What is Scrub Typhus?</div>
+            <div class="faq-answer">
+                <p>Scrub Typhus is caused by the bacteria <i>Orientia tsutsugamushi</i>, transmitted through infected
+                    chigger mites.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">How does it spread?</div>
+            <div class="faq-answer">
+                <p>It spreads through bites of infected chiggers — not from person to person.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">What are the symptoms?</div>
+            <div class="faq-answer">
+                <p>Fever, rash, headache, body ache, weakness, and an eschar at the bite site.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">How can I prevent Scrub Typhus?</div>
+            <div class="faq-answer">
+                <p>Use insect repellent, wear full clothing, avoid bushes, and inspect skin after outdoor activity.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">Where can I find medical help?</div>
+            <div class="faq-answer">
+                <p>You can use the STAR “Nearby Hospitals” feature to find hospitals and labs instantly.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <span>© 2025 STAR • Smart Scrub Typhus Monitoring Platform</span>
+
+            <div class="footer-socials">
+                <a href="#" aria-label="Website"><i class="fas fa-globe"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+
+    <!-- SCRIPTS -->
+    <script>
+        // FAQ Toggle
+        const questions = document.querySelectorAll('.faq-question');
+
+        questions.forEach(q => {
+            q.addEventListener('click', () => {
+                q.classList.toggle('active');
+                const answer = q.nextElementSibling;
+                answer.style.maxHeight = answer.style.maxHeight ? null : answer.scrollHeight + "px";
+            });
+        });
+
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            document.getElementById("navLinks").classList.toggle("show");
+        }
+    </script>
+
+</body>
+
+</html>
